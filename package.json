@@ -4,6 +4,7 @@
   "description": "MachiKoro Discord Bot",
   "main": "index.js",
   "scripts": {
+    "start": "npx nodemon -r dotenv/config index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,5 +19,13 @@
   "bugs": {
     "url": "https://github.com/jarvisluong/machibot/issues"
   },
-  "homepage": "https://github.com/jarvisluong/machibot#readme"
+  "homepage": "https://github.com/jarvisluong/machibot#readme",
+  "dependencies": {
+    "discord.js": "^12.2.0",
+    "dotenv": "^8.2.0",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
 }
