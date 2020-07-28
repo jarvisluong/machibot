@@ -2,6 +2,8 @@ const Discord = require("discord.js");
 const logger = require("./logger");
 const { getDiscordBotToken } = require("./validate-env");
 
+const config = require("../config.json");
+
 function createBot() {
   const client = new Discord.Client();
   /**
@@ -18,10 +20,8 @@ function createBot() {
     startListening() {
       // Create an event listener for messages
       client.on("message", (message) => {
-        // If the message is "ping"
-        if (message.content === "ping") {
-          // Send "pong" to the same channel
-          message.channel.send("pong");
+        if (message.content[0] === config.prefix) {
+          message.channel.send("OK!");
         }
       });
 
