@@ -2,6 +2,9 @@ const Discord = require("discord.js");
 const logger = require("./logger");
 const { getDiscordBotToken } = require("./validate-env");
 
+const { aboutHandler } = require("./command-handlers/about");
+const { helpHandler } = require("./command-handlers/help");
+
 const config = require("../config.json");
 
 function createBot() {
@@ -20,8 +23,20 @@ function createBot() {
     startListening() {
       // Create an event listener for messages
       client.on("message", (message) => {
-        if (message.content[0] === config.prefix) {
-          message.channel.send("OK!");
+        // Don't process bot message
+        if (message.author.bot) return;
+        // Don't process message without correct prefix
+        if (!message.content.startsWith(config.prefix)) return;
+
+        const commandBody = message.content.slice(config.prefix.length);
+        const args = commandBody.split(" ");
+        const command = args.shift().toLowerCase();
+
+        if (command === "help") {
+          helpHandler(message);
+        }
+        if (command === "about") {
+          aboutHandler(message);
         }
       });
 
